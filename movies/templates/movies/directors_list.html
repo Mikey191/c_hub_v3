@@ -1,0 +1,7 @@
+<ul>
+  {% for director in directors %}
+    <li><a href="{% url 'movies:by_director' director.id %}">{{ director.name }}</a></li>
+  {% empty %}
+    <li>Нет режиссёров</li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="{% url 'movies:index' %}">Кино-проекты</a></h1>
+      <nav>
+        <!-- Общие блоки тегов/жанров/режиссёров можно сюда включать -->
+      </nav>
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <p>Контакты</p>
+    </footer>
+  </body>
+</html>

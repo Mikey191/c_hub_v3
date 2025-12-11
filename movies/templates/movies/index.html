@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ title }}</h1>
+
+  <!-- Боковые списки (инклюд-теги, жанры, режиссёры, актёры) -->
+  {% load movie_tags %}
+  <aside>
+    <h3>Теги</h3>
+    {% show_tags %}
+    <h3>Жанры</h3>
+    {% show_genres %}
+    <h3>Режиссёры</h3>
+    {% show_directors 8 %}
+    <h3>Актёры</h3>
+    {% show_actors 8 %}
+  </aside>
+
+  <ul>
+    {% for film in films %}
+      <li>
+        <h3>
+          <a href="{% url 'movies:detail' film.id %}">{{ film.title }}</a>
+          {% if film.year %} ({{ film.year }}){% endif %}
+        </h3>
+
+        <p>{{ film.description|truncatechars:300 }}</p>
+
+        <p>Режиссёры:
+          {% for director in film.directors.all %}
+            <a href="{% url 'movies:by_director' director.id %}">{{ director.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% empty %}
+            —нет режиссёров—
+          {% endfor %}
+        </p>
+
+        <p>Актёры:
+          {% for actor in film.actors.all %}
+            <a href="{% url 'movies:by_actor' actor.id %}">{{ actor.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% empty %}
+            —нет актёров—
+          {% endfor %}
+        </p>
+
+        <p>Жанры:
+          {% for genre in film.genres.all %}
+            <a href="{% url 'movies:by_genre' genre.slug %}">{{ genre.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% empty %}
+            —нет жанров—
+          {% endfor %}
+        </p>
+
+        <p>Теги:
+          {% for tag in film.tags.all %}
+            <a href="{% url 'movies:by_tag' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% empty %}
+            —нет тегов—
+          {% endfor %}
+        </p>
+      </li>
+    {% empty %}
+      <li>Фильмов нет.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

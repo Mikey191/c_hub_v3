@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ title }}</h1>
+
+  <article>
+    <h2>{{ film.title }}</h2>
+    <p>{{ film.description }}</p>
+
+    <p>Год: {{ film.year }}</p>
+
+    <p>Режиссёры:
+      {% for director in film.directors.all %}
+        <a href="{% url 'movies:by_director' director.id %}">{{ director.name }}</a>{% if not forloop.last %}, {% endif %}
+      {% empty %}
+        —нет режиссёров—
+      {% endfor %}
+    </p>
+
+    <p>Актёры:
+      {% for actor in film.actors.all %}
+        <a href="{% url 'movies:by_actor' actor.id %}">{{ actor.name }}</a>{% if not forloop.last %}, {% endif %}
+      {% empty %}
+        —нет актёров—
+      {% endfor %}
+    </p>
+
+    <p>Жанры:
+      {% for genre in film.genres.all %}
+        <a href="{% url 'movies:by_genre' genre.slug %}">{{ genre.name }}</a>{% if not forloop.last %}, {% endif %}
+      {% empty %}
+        —нет жанров—
+      {% endfor %}
+    </p>
+
+    <p>Теги:
+      {% for tag in film.tags.all %}
+        <a href="{% url 'movies:by_tag' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+      {% empty %}
+        —нет тегов—
+      {% endfor %}
+    </p>
+
+    <p><a href="{% url 'movies:index' %}">← Назад к списку</a></p>
+  </article>
+{% endblock %}
