@@ -24,6 +24,8 @@
           {% if film.year %} ({{ film.year }}){% endif %}
         </h3>
 
+        <p>Категория: {{ film.category }}</p>
+
         <p>{{ film.description|truncatechars:300 }}</p>
 
         <p>Режиссёры:

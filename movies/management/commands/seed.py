@@ -6,6 +6,7 @@ import random
 from datetime import datetime
 
 from movies.models import (
+    Category,
     Tag,
     Genre,
     Director,
@@ -127,6 +128,17 @@ class Command(BaseCommand):
             )
             actors.append(actor)
         self.stdout.write(f"Актёры: {len(actors)}")
+        
+        # Categories
+        self.stdout.write("Создаём категории...")
+        category_names = ["0+", "4+", "6+", "12+", "16+", "18+"]
+
+        categories = []
+        for name in category_names:
+            slug = slugify(name)
+            category = Category.objects.create(name=name, slug=slug)
+            categories.append(category)
+        self.stdout.write(f"Категории: {len(categories)}")
 
         # Movies
         self.stdout.write("Создаём фильмы...")
@@ -145,6 +157,7 @@ class Command(BaseCommand):
                 title=title,
                 description=description,
                 year=year,
+                category=random.choice(categories),
                 is_published=random.choice([True] * 9 + [False]),  # 90% published
             )
 

@@ -72,12 +72,23 @@ class ActorProfile(models.Model):
 
     def __str__(self):
         return f"Профиль актёра: {self.actor.name}"
+    
+class Category(models.Model):
+    name = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True)
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name
 
 
 class Movie(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     year = models.PositiveIntegerField(null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='movies', blank=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='movies')
     genres = models.ManyToManyField(Genre, blank=True, related_name='movies')
     directors = models.ManyToManyField(Director, blank=True, related_name='movies')
