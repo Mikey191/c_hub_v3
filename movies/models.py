@@ -88,6 +88,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     year = models.PositiveIntegerField(null=True, blank=True)
+    poster = models.ImageField(upload_to='posters/', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='movies', blank=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='movies')
     genres = models.ManyToManyField(Genre, blank=True, related_name='movies')

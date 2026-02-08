@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #222;
+    color: #fff;
+    padding: 15px;
+}
+
+header a {
+    color: #222;
+    text-decoration: none;
+}
+
+header h1 a {
+    color: #fff;
+}
+
+main {
+    padding: 20px;
+}
+
+aside {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #222;
+    text-align: center;
+}
+
+aside h3 {
+    margin-top: 40px;
+}
+
+aside ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+aside ul li {
+    margin-right: 15px;
+    gap: 20px;
+    font-size: 15px;
+}
+
+
+main ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main ul li {
+    flex: 1 0 200px;
+    background: #fff;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.movie-poster {
+    max-width: 200px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+footer {
+    background: #222;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}

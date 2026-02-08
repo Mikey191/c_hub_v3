@@ -4,6 +4,9 @@ from django.db import transaction
 from faker import Faker
 import random
 from datetime import datetime
+import os
+from django.conf import settings
+from django.core.files import File
 
 from movies.models import (
     Category,
@@ -18,6 +21,11 @@ from movies.models import (
 
 fake = Faker()
 
+SEED_IMAGE_PATH = os.path.join(
+    settings.BASE_DIR,
+    "img_for_seed",
+    "avatar.jpg"
+)
 
 class Command(BaseCommand):
     help = "Seed DB: create tags, genres, directors (+profiles), actors (+profiles) and movies."
@@ -158,8 +166,23 @@ class Command(BaseCommand):
                 description=description,
                 year=year,
                 category=random.choice(categories),
-                is_published=random.choice([True] * 9 + [False]),  # 90% published
+                is_published=random.choice([True] * 9 + [False]),
             )
+
+            # Добавляем постер ко всем фильмам
+            if os.path.exists(SEED_IMAGE_PATH):
+                with open(SEED_IMAGE_PATH, "rb") as img_file:
+                    movie.poster.save(
+                        "avatar.jpg",
+                        File(img_file),
+                        save=True
+                    )
+            else:
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"Файл {SEED_IMAGE_PATH} не найден. Постер не добавлен."
+                    )
+                )
 
             # attach tags (0..4)
             if tags:

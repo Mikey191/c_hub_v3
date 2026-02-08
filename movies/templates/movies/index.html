@@ -3,22 +3,14 @@
 {% block content %}
   <h1>{{ title }}</h1>
 
-  <!-- Боковые списки (инклюд-теги, жанры, режиссёры, актёры) -->
-  {% load movie_tags %}
-  <aside>
-    <h3>Теги</h3>
-    {% show_tags %}
-    <h3>Жанры</h3>
-    {% show_genres %}
-    <h3>Режиссёры</h3>
-    {% show_directors 8 %}
-    <h3>Актёры</h3>
-    {% show_actors 8 %}
-  </aside>
+  
 
   <ul>
     {% for film in films %}
       <li>
+        {% if film.poster %}
+          <img src="{{ film.poster.url }}" alt="{{ film.title }}" class="movie-poster">
+        {% endif %}
         <h3>
           <a href="{% url 'movies:detail' film.id %}">{{ film.title }}</a>
           {% if film.year %} ({{ film.year }}){% endif %}

@@ -4,6 +4,9 @@
   <h1>{{ title }}</h1>
 
   <article>
+    {% if film.poster %}
+      <img src="{{ film.poster.url }}" alt="{{ film.title }}" class="movie-poster">
+    {% endif %}
     <h2>{{ film.title }} ({{ film.category }})</h2>
     <p>{{ film.description }}</p>
 

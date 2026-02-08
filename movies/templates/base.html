@@ -1,15 +1,26 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="utf-8">
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
   </head>
   <body>
     <header>
       <h1><a href="{% url 'movies:index' %}">Кино-проекты</a></h1>
-      <nav>
-        <!-- Общие блоки тегов/жанров/режиссёров можно сюда включать -->
-      </nav>
+      {% load movie_tags %}
+      <aside>
+        <h3>Теги</h3>
+        {% show_tags %}
+        <h3>Жанры</h3>
+        {% show_genres %}
+        <h3>Режиссёры</h3>
+        {% show_directors 8 %}
+        <h3>Актёры</h3>
+        {% show_actors 8 %}
+      </aside>
     </header>
 
     <main>
