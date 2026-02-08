@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-olj8os)_$=g$&gngpj5yn%o6@#%63tn&2#b#d0an@8tuij==)e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ipotnin.ru', '*.cinemahub.ru']
+ALLOWED_HOSTS = ['ipotnin.ru', '*.ipotnin.ru', 'ipotnin.ru:8000']
 
 
 # Application definition
